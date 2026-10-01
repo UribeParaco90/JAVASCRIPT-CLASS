@@ -9,26 +9,72 @@
   <pre id="resultado"></pre>
 
   <script>
+    // Función para pedir un texto que no esté vacío
+    function pedirTexto(mensaje) {
+      let texto;
+
+      do {
+        texto = prompt(mensaje);
+
+        // Si el usuario presiona Cancelar
+        if (texto === null) {
+          texto = "";
+        }
+
+        // Quitamos espacios al inicio y al final
+        texto = texto.trim();
+
+        if (texto === "") {
+          alert("Este campo no puede estar vacío. Por favor, ingrese un valor.");
+        }
+
+      } while (texto === "");
+
+      return texto;
+    }
+
+    // Función para pedir una edad válida
+    function pedirEdad() {
+      let edad;
+
+      do {
+        edad = parseInt(prompt("Ingrese su edad:"));
+
+        if (isNaN(edad) || edad <= 0) {
+          alert("Edad inválida. Debe ingresar una edad mayor que 0.");
+        }
+
+      } while (isNaN(edad) || edad <= 0);
+
+      return edad;
+    }
+
     // Función para pedir una nota válida (entre 1.0 y 5.0)
     function pedirNota(competencia, numero) {
       let nota;
+
       do {
-        nota = parseFloat(prompt("Competencia " + competencia + " - Nota " + numero + " (1.0 a 5.0):"));
+        nota = parseFloat(
+          prompt("Competencia " + competencia + " - Nota " + numero + " (1.0 a 5.0):")
+        );
+
         if (isNaN(nota) || nota < 1.0 || nota > 5.0) {
           alert("Nota inválida. Debe estar entre 1.0 y 5.0");
         }
+
       } while (isNaN(nota) || nota < 1.0 || nota > 5.0);
+
       return nota;
     }
 
     // 1. Datos del estudiante
-    let nombre = prompt("Ingrese su nombre:");
-    let edad = parseInt(prompt("Ingrese su edad:"));
-    let trimestre = prompt("Ingrese el trimestre:");
+    let nombre = pedirTexto("Ingrese su nombre:");
+    let edad = pedirEdad();
+    let trimestre = pedirTexto("Ingrese el trimestre:");
 
     // 2. Competencias
-    let competencia1 = prompt("Ingrese el nombre de la competencia 1:");
-    let competencia2 = prompt("Ingrese el nombre de la competencia 2:");
+    let competencia1 = pedirTexto("Ingrese el nombre de la competencia 1:");
+    let competencia2 = pedirTexto("Ingrese el nombre de la competencia 2:");
 
     // 3. Notas de la competencia 1
     let c1n1 = pedirNota(competencia1, 1);
@@ -53,13 +99,17 @@
     let estadoTrimestre = promedioTrimestre >= 3.5 ? "APROBÓ" : "NO APROBÓ";
 
     let salida = "";
+
     salida += "Nombre: " + nombre + "\n";
     salida += "Edad: " + edad + "\n";
     salida += "Trimestre: " + trimestre + "\n\n";
+
     salida += "Competencia 1: " + competencia1 + "\n";
     salida += "  Promedio: " + promedio1.toFixed(2) + " -> " + estado1 + "\n\n";
+
     salida += "Competencia 2: " + competencia2 + "\n";
     salida += "  Promedio: " + promedio2.toFixed(2) + " -> " + estado2 + "\n\n";
+
     salida += "Promedio del trimestre: " + promedioTrimestre.toFixed(2) + "\n";
     salida += "Resultado del trimestre: " + estadoTrimestre;
 
