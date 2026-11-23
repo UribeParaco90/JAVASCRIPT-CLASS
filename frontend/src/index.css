@@ -1,0 +1,5 @@
+@import "tailwindcss";
+@theme { --font-sans: "Inter", sans-serif; --font-display: "Space Grotesk", sans-serif;
+  --color-ink: #0f172a; --color-brand: #0e7490; --color-accent: #f59e0b; --color-mist: #f1f5f9; }
+
+  
